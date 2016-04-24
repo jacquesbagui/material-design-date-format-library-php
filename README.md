@@ -9,7 +9,7 @@ For all features using examples see /example/index.php. PHP > 5.3 required.
 #Datetime input formats support
 
 <code>
-$date = new MaterialDesignDateFormats() ; <br><br>
+$date = new MaterialDesignDateFormats(); </br> </br>
 echo $date->display("0000-00-00 00:00:00");
 </code>
 
