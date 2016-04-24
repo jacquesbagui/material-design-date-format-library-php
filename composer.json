@@ -1,5 +1,6 @@
 {
 	"name": "material-design-date-format",
+	"version": "Beta",
 	"description": "PHP library material design date format",
 	"keywords": ["PHP", "date", "timezone", "datetime", "time"],
 	"homepage": " ",
