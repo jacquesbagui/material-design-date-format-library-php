@@ -11,10 +11,9 @@ For all features using examples see /example/index.php. PHP > 5.3 required.
 Datetime input formats support
 
 <code>
-<ul>
-<li>$date = new MaterialDesignDateFormats();</li>
-<li>echo $date->display("0000-00-00 00:00:00");</li>
-</ul>
+$date = new MaterialDesignDateFormats(); <br/><br/>
+echo $date->display("0000-00-00 00:00:00");
+
 </code>
 
 
