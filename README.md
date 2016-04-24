@@ -8,14 +8,13 @@ For all features using examples see /example/index.php. PHP > 5.3 required.
 
 #Usage
 
-<h4>Datetime input formats support</h4>
+Datetime input formats support
 
 <code>
-
-$date = new MaterialDesignDateFormats();
-
-echo $date->display("0000-00-00 00:00:00");
-
+<ul>
+<li>$date = new MaterialDesignDateFormats();</li>
+<li>echo $date->display("0000-00-00 00:00:00");</li>
+</ul>
 </code>
 
 
