@@ -6,19 +6,21 @@ Google Material Design specification provides data formats. This data format giv
 #Features
 For all features using examples see /example/index.php. PHP > 5.3 required.
 
-#Datetime input formats support
+#Usage
+
+<h4>Datetime input formats support</h4>
 
 <code>
-$date = new MaterialDesignDateFormats(); </br> </br>
-echo $date->display("0000-00-00 00:00:00");
+<p>$date = new MaterialDesignDateFormats();</p> </br> </br>
+</p>echo $date->display("0000-00-00 00:00:00");</p>
 </code>
 
 
 
-#Auteur
+#Author
 
 Jean Jacques Bagui
 
 #Licence
 
-Ce projet est placé sous la licence <a href="https://opensource.org/licenses/MIT">MIT</a>.
+This project is under the license <a href="https://opensource.org/licenses/MIT">MIT</a>.
