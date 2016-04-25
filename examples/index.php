@@ -6,16 +6,16 @@ require_once("../src/MaterialDesignDateFormats.php");
 
 
 
-$date =  new MaterialDesignDateFormats();
+//$date =  new MaterialDesignDateFormats();
 
 
-$future = $date->display("2016-04-23 17:12:01");
+//$future = $date->display("2016-04-23 17:12:01");
 
-echo $future .'<br> <br>';
+echo MaterialDesignDateFormats::initDate("2016-04-23 17:12:01") .'<br> <br>';
+echo MaterialDesignDateFormats::display();
 
 
-
-$futureContext = $date->futureContext("2015-04-23 17:12:01");
+/*$futureContext = $date->futureContext("2015-04-23 17:12:01");
 
 echo $futureContext .'<br> <br>';
 
@@ -28,7 +28,7 @@ echo $pastContext .'<br> <br>';
 
 $distancePastContext = $date->distancePastContext("2016-03-23 17:12:01");
 
-echo $distancePastContext .'<br> <br>';
+echo $distancePastContext .'<br> <br>';*/
 
 
 $weekdayContext = $date->weekdayContext("2016-03-23 17:12:01");
