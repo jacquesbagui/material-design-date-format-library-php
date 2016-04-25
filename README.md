@@ -11,8 +11,8 @@ For all features using examples see /example/index.php. PHP > 5.3 required.
 Datetime input formats support
 
 ```
-echo MaterialDesignDateFormats::initDate("2016-04-23 17:12:01");
-echo MaterialDesignDateFormats::display();
+MaterialDesignDateFormats::initDate("2016-04-23 17:12:01");
+MaterialDesignDateFormats::display();
 ```
 
 #Author
