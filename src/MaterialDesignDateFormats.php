@@ -166,7 +166,7 @@ namespace  Jacquesbagui\MaterialDate;
     * @return
     */
 
-    public static function pastContext($datetime){
+    public static function pastContext(){
       //retrieve the browser Date
 
       $pastday = date_format(self::$date, 'M, j g:i a');
