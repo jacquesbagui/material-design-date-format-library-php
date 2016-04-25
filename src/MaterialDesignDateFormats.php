@@ -5,29 +5,51 @@ namespace  Jacquesbagui\MaterialDate;
 /**
  * Created by Jean Jacques Bagui on 24/04/2016.
  */
-class  MaterialDesignDateFormats
+ class  MaterialDesignDateFormats
 {
+     private static $isInitialize=false;
+     private static $language;
+     private static $time_ago ;
+     private static $cur_time ;
+     private static $time_elapsed ;
+     private static $seconds  ;
+     private static $minutes  ;
+     private static $hours ;
+     private static $days  ;
+     private static $weeks ;
+     private static $months ;
+     private static $years ;
+     private static $date;
 
+     private static function intializeMaterialDesignDateFormats(){
+         if (self::$isInitialize)
+             return;
+         self::$isInitialize = true;
+     }
 
-    public function display($datetime){
+     public function __construct(){
+         self::intializeMaterialDesignDateFormats();
+     }
 
-      $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-      $time_ago = strtotime($datetime);
-      $cur_time   = time();
-      $time_elapsed   = $cur_time - $time_ago;
-      $seconds    = $time_elapsed ;
-      $minutes    = round($time_elapsed / 60 );
-      $hours      = round($time_elapsed / 3600);
-      $days       = round($time_elapsed / 86400 );
-      $weeks      = round($time_elapsed / 604800);
-      $months     = round($time_elapsed / 2600640 );
-      $years      = round($time_elapsed / 31207680 );
+     public static function initDate($datetime){
+         self::$language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+         self::$time_ago = strtotime($datetime);
+         self::$cur_time   = time();
+         self::$time_elapsed   = self::$cur_time - self::$time_ago;
+         self::$seconds    = self::$time_elapsed ;
+         self::$minutes    = round(self::$time_elapsed / 60 );
+         self::$hours      = round(self::$time_elapsed / 3600);
+         self::$days       = round(self::$time_elapsed / 86400 );
+         self::$weeks      = round(self::$time_elapsed / 604800);
+         self::$months     = round(self::$time_elapsed / 2600640 );
+         self::$years      = round(self::$time_elapsed / 31207680 );
+         self::$date = date_create_from_format('Y-m-d H:i:s', $datetime);
+     }
 
-      $date = date_create_from_format('Y-m-d H:i:s', $datetime);
-
+     public static function display(){
       // Seconds
-      if($seconds <= 60){
-        if($lang == "fr"){
+      if(self::$seconds <= 60){
+        if(self::$language == "fr"){
           return "A l'instant";
         }else{
           return "Just now";
@@ -35,89 +57,89 @@ class  MaterialDesignDateFormats
       }
 
       //Minutes
-      else if($minutes <=60){
-        if($lang == "fr"){
-          if($minutes==1){
+      else if(self::$minutes <=60){
+        if(self::$language == "fr"){
+          if(self::$minutes==1){
               return "une minute auparavant";
           }else{
-              return "il y a $minutes minutes";
+              return 'il y a '.self::$minutes.' minutes';
           }
         }else{
-          if($minutes==1){
+          if(self::$minutes==1){
               return "one minute ago";
           }else{
-              return "$minutes minutes ago";
+              return self::$minutes.' minutes ago';
           }
         }
       }
 
       //Hours
-      else if($hours <=24){
-        if($lang == "fr"){
-          if($hours==1){
+      else if(self::$hours <=24){
+        if(self::$language == "fr"){
+          if(self::$hours==1){
               return "il y a une heure";
           }else{
-              return "il y a $hours hrs";
+              return 'il y a '.self::$hours.'  hrs';
           }
         }else{
-          if($hours==1){
+          if(self::$hours==1){
               return "an hour ago";
           }else{
-              return "$hours hrs ago";
+              return self::$hours.' hrs ago';
           }
         }
       }
 
       //Jours
-      else if($days <= 7){
-          if($lang == "fr"){
-            if($days==1){
-                return "hier à " . date_format($date, 'H:i');
+      else if(self::$days <= 7){
+          if(self::$language == "fr"){
+            if(self::$days==1){
+                return "hier à " . date_format(self::$date, 'H:i');
             }else{
-                return " il y a $days jours";
+                return ' il y a '.self::$days.' jours';
             }
           }else{
-            if($days==1){
-                return "yesterday at " . date_format($date, 'H:i');
+            if(self::$days==1){
+                return "yesterday at " . date_format(self::$date, 'H:i');
             }else{
-                return "$days days ago";
+                return self::$days .'days ago';
             }
           }
       }
       //Semaines
-      else if($weeks <= 4.3){
-        if($lang == "fr"){
-          if($weeks==1){
+      else if(self::$weeks <= 4.3){
+        if(self::$language == "fr"){
+          if(self::$weeks==1){
               return "il y a une semaine";
           }else{
-              return " il y a $weeks semaines";
+              return ' il y a '.self::$weeks.' semaines';
           }
         }else{
-          if($weeks==1){
+          if(self::$weeks==1){
               return "A week ago";
           }else{
-              return "$weeks weeks ago";
+              return self::$weeks .'weeks ago';
           }
         }
 
       }
       //Mois
-      else if($months <=12){
+      else if(self::$months <=12){
 
-        return $this->pastContext($datetime);
+        return self::pastContext();
       }
       //Years
       else{
-          return $this->futureContext($datetime);
+          return self::futureContext();
       }
     }
 
-  public function currentYear($datetime){
-    $date = date_create_from_format('Y-m-d H:i:s', $datetime);
-    $currentYear = date("Y");
-    $paramYear = date_format($date, 'Y');
+  public static function currentYear(){
+      self::$date = date_create_from_format('Y-m-d H:i:s', self::$datetime);
+      self::$currentYear = date("Y");
+      self::$paramYear = date_format(self::$date, 'Y');
 
-    if($currentYear == $paramYear){
+    if(self::$currentYear == self::$paramYear){
       return true;
     }else{
       return false;
@@ -131,12 +153,9 @@ class  MaterialDesignDateFormats
    * @return
    */
 
-   public function futureContext($datetime){
+   public static function futureContext(){
      //retrieve the browser Date
-     $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-
-     $date = date_create_from_format('Y-m-d H:i:s', $datetime);
-     $futureday = date_format($date, 'j M, g:i a');
+       $futureday = date_format(self::$date, 'j M, g:i a');
      return $futureday;
    }
 
@@ -147,12 +166,10 @@ class  MaterialDesignDateFormats
     * @return
     */
 
-    public function pastContext($datetime){
+    public static function pastContext(){
       //retrieve the browser Date
-      $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 
-      $date = date_create_from_format('Y-m-d H:i:s', $datetime);
-      $pastday = date_format($date, 'M, j g:i a');
+      $pastday = date_format(self::$date, 'M, j g:i a');
       return $pastday;
     }
     /**
@@ -162,12 +179,10 @@ class  MaterialDesignDateFormats
      * @return
      */
 
-     public function distancePastContext($datetime){
+     public static function distancePastContext(){
        //retrieve the browser Date
-       $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 
-       $date = date_create_from_format('Y-m-d H:i:s', $datetime);
-       $distancepassday = date_format($date, 'j M');
+       $distancepassday = date_format(self::$date, 'j M');
        return $distancepassday;
      }
      /**
@@ -177,12 +192,10 @@ class  MaterialDesignDateFormats
       * @param DateTime
       * @return
       */
-     public function weekdayContext($datetime){
+     public static function weekdayContext(){
 
-       $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 
-       $date = date_create_from_format('Y-m-d H:i:s', $datetime);
-       $weekday = date_format($date, 'D, M j, g:i a');
+       $weekday = date_format(self::$date, 'D, M j, g:i a');
 
        return $weekday;
      }
