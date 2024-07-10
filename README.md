@@ -3,10 +3,10 @@ Google Material Design specification provides data formats. This data format giv
 
 
 
-#Features
+## Features
 For all features using examples see /example/index.php. PHP > 5.3 required.
 
-#Usage
+## Usage
 
 Datetime input formats support
 
@@ -15,10 +15,10 @@ MaterialDesignDateFormats::initDate("2016-04-23 17:12:01");
 MaterialDesignDateFormats::display();
 ```
 
-#Author
+## Author
 
 Jean Jacques Bagui
 
-#Licence
+## Licence
 
 This project is under the license <a href="https://opensource.org/licenses/MIT">MIT</a>.
